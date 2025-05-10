@@ -63,8 +63,8 @@ MONGO_DB_URL=mongodb://localhost:27017/stage-api
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/sahiljamwal/stage-assignment.git
-cd stage-assignment
+git clone https://github.com/sahiljamwal/stage-api.git
+cd stage-api
 ```
 
 2. Install dependencies:
