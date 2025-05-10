@@ -1,10 +1,7 @@
+import configuration from "../common/configurations/config";
 import mongoose from "mongoose";
-import { config } from "dotenv";
 import { EGenre } from "../v1/constants/enum";
 import TvShowModel from "../v1/schemas/tv-shows.schema";
-import configuration from "../common/configurations/config";
-
-config();
 
 const tvShowsData = [
   {
