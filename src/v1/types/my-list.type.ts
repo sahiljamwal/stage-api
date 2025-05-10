@@ -6,6 +6,6 @@ export type IAddToMyListPayload = {
 };
 
 export type IFetchListReq = {
-  params: { contentId: string };
+  params: { contentListId: string };
   query: { page: number; limit: number; filter: { contentType: EContentType } };
 };

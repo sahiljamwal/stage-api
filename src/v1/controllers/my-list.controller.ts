@@ -1,16 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import myListService from "../services/my-list.service";
+import { IFetchListReq } from "../types/my-list.type";
 
 class MyListController {
   constructor(private _service = myListService) {}
 
   public add = async (
-    _request: Request,
+    request: Request,
     response: Response,
     next: NextFunction
   ) => {
     try {
-      const data = await this._service.add();
+      const data = await this._service.add(request.body, request.user!);
       return response.status(201).send(data);
     } catch (error) {
       return next(error);
@@ -18,12 +19,12 @@ class MyListController {
   };
 
   public delete = async (
-    _request: Request,
+    request: Request,
     response: Response,
     next: NextFunction
   ) => {
     try {
-      await this._service.delete();
+      await this._service.delete(request.params.contentListId, request.user!);
       return response.sendStatus(204);
     } catch (error) {
       return next(error);
@@ -31,12 +32,12 @@ class MyListController {
   };
 
   public get = async (
-    _request: Request,
+    request: Request<any, any, any, IFetchListReq["query"]>,
     response: Response,
     next: NextFunction
   ) => {
     try {
-      const data = await this._service.get();
+      const data = await this._service.get(request.query, request.user!);
       return response.status(200).send(data);
     } catch (error) {
       return next(error);

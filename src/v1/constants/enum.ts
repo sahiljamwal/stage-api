@@ -12,3 +12,7 @@ export enum EContentType {
   MOVIE = "movie",
   TV_SHOW = "tv-show",
 }
+
+export enum EPaginationQueryCodes {
+  FETCH_USER_WATCHLIST = "fetch-user-watchlist",
+}

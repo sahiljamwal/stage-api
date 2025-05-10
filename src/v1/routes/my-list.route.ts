@@ -12,7 +12,7 @@ const myListRouter = express.Router();
 myListRouter.use(validateUser);
 myListRouter.post("/", validateAddToMyListReq, myListController.add);
 myListRouter.delete(
-  "/:contentId",
+  "/:contentListId",
   validateDeleteFromMyListReq,
   myListController.delete
 );

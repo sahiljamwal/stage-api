@@ -23,7 +23,7 @@ const addToListSchema = Joi.object<IAddToMyListPayload>({}).keys({
 });
 
 const myListParamsSchema = Joi.object<IFetchListReq["params"]>().keys({
-  contentId: Joi.string()
+  contentListId: Joi.string()
     .custom(validateObjectId)
     .required()
     .label("contentId"),

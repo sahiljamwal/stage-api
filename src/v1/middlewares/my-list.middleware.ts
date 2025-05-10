@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ValidationError } from "../../common/errors/custom.error";
 import { myListSchema } from "../helpers/joi-schema.helper";
+import { IFetchListReq } from "../types/my-list.type";
 
 export const validateAddToMyListReq = async (
   request: Request,
@@ -33,7 +34,7 @@ export const validateDeleteFromMyListReq = async (
 };
 
 export const validateFetchMyListReq = async (
-  request: Request,
+  request: Request<any, any, any, IFetchListReq["query"]>,
   _response: Response,
   next: NextFunction
 ) => {
