@@ -49,17 +49,15 @@ class MyListService {
         .lean();
 
       if (existingContent) {
-        return;
+        return existingContent;
       }
 
-      await this._model.create({
+      return await this._model.create({
         userId,
         contentId,
         contentType,
         title: content.title,
       });
-
-      return;
     } catch (error) {
       return this._handleError(error as Error);
     }
@@ -78,7 +76,7 @@ class MyListService {
         throw new AuthorizationError(v1EC.UNAUTHORIZED_TO_PERFORM_THIS_ACTION);
       }
 
-      await this._model.deleteOne({ _id: watchlistId });
+      return await this._model.deleteOne({ _id: watchlistId });
     } catch (error) {
       return this._handleError(error as Error);
     }

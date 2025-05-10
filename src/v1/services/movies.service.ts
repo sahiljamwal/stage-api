@@ -1,4 +1,5 @@
 import { EC } from "../../common/constants/errors";
+import { EC as v1EC } from "../constants/errors";
 import { BaseError } from "../../common/errors/base.error";
 import { NotFoundError, SystemError } from "../../common/errors/custom.error";
 import MovieModel from "../schemas/movies.schema";
@@ -18,7 +19,7 @@ class Moviesservice {
     try {
       const movie = await this._model.findOne({ _id: movieId }).lean();
       if (!movie) {
-        throw new NotFoundError("Movie not found");
+        throw new NotFoundError(v1EC.MOVIE_NOT_FOUND);
       }
 
       return movie;

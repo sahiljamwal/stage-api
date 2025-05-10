@@ -3,7 +3,10 @@ import { AuthenticationError } from "../../common/errors/custom.error";
 import { sample } from "lodash";
 import userService from "../services/user.service";
 
-const users = ["681ef3592194900a40fa0a06", "681ef3592194900a40fa0a07"];
+const users = [
+  "681ef3592194900a40fa0a06",
+  //  "681ef3592194900a40fa0a07"
+];
 
 export const validateUser = async (
   request: Request,

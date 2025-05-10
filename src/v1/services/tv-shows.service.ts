@@ -1,10 +1,11 @@
 import { EC } from "../../common/constants/errors";
+import { EC as v1EC } from "../constants/errors";
 import { BaseError } from "../../common/errors/base.error";
 import { NotFoundError, SystemError } from "../../common/errors/custom.error";
-import MovieModel from "../schemas/movies.schema";
+import TvShowModel from "../schemas/tv-shows.schema";
 
 class TvShowsService {
-  constructor(private _model = MovieModel) {}
+  constructor(private _model = TvShowModel) {}
 
   private _handleError = (error: Error) => {
     if (error instanceof BaseError) {
@@ -18,7 +19,7 @@ class TvShowsService {
     try {
       const tvShow = await this._model.findOne({ _id: tvshowId }).lean();
       if (!tvShow) {
-        throw new NotFoundError("TV Show not found");
+        throw new NotFoundError(v1EC.TV_SHOW_NOT_FOUND);
       }
 
       return tvShow;
