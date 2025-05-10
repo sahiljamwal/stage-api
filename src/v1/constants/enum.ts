@@ -9,6 +9,6 @@ export enum EGenre {
 }
 
 export enum EContentType {
-  MOVIE = "Movie",
-  TV_SHOW = "TV Show",
+  MOVIE = "movie",
+  TV_SHOW = "tv-show",
 }

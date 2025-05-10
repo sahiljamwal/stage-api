@@ -1,5 +1,5 @@
 import { Model, model, Schema } from "mongoose";
-import { IWatchlist } from "../types/model/watchlist.schema";
+import { IWatchlist } from "../types/model/watchlist.type";
 import { EContentType } from "../constants/enum";
 
 const schema = new Schema<IWatchlist>(
