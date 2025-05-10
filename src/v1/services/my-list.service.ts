@@ -16,6 +16,7 @@ import { IAddToMyListPayload, IFetchListReq } from "../types/my-list.type";
 import moviesService from "./movies.service";
 import tvShowsService from "./tv-shows.service";
 import { IPaginationResponse } from "../types/pagination.type";
+import watchlistCacheHelper from "../helpers/watchlist-cache.helper";
 
 class MyListService {
   constructor(
@@ -52,12 +53,16 @@ class MyListService {
         return existingContent;
       }
 
-      return await this._model.create({
+      const created = await this._model.create({
         userId,
         contentId,
         contentType,
         title: content.title,
       });
+
+      await watchlistCacheHelper.invalidate(userId.toString());
+
+      return created;
     } catch (error) {
       return this._handleError(error as Error);
     }
@@ -76,6 +81,8 @@ class MyListService {
         throw new AuthorizationError(v1EC.UNAUTHORIZED_TO_PERFORM_THIS_ACTION);
       }
 
+      await watchlistCacheHelper.invalidate(userId.toString());
+
       return await this._model.deleteOne({ _id: watchlistId });
     } catch (error) {
       return this._handleError(error as Error);
@@ -87,10 +94,22 @@ class MyListService {
     user: IUser
   ): Promise<IPaginationResponse<IWatchlist>> => {
     try {
+      const { _id: userId } = user;
       const meta = getPaginationQuery<IWatchlist>(
         EPaginationQueryCodes.FETCH_USER_WATCHLIST,
         { query: cloneDeep(query), body: { user: cloneDeep(user) } }
       );
+
+      const cached = watchlistCacheHelper.get(
+        userId.toString(),
+        query,
+        meta.skip,
+        meta.limit
+      );
+      if (cached) {
+        console.log("Cache hit");
+        return cached;
+      }
 
       const [listItems, total] = await Promise.all([
         this._model
@@ -102,7 +121,17 @@ class MyListService {
         this._model.countDocuments(meta.query),
       ]);
 
-      return { meta: { total }, data: listItems };
+      const result = { meta: { total }, data: listItems };
+
+      watchlistCacheHelper.set(
+        userId.toString(),
+        query,
+        meta.skip,
+        meta.limit,
+        result
+      );
+
+      return result;
     } catch (error) {
       return this._handleError(error as Error);
     }

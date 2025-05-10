@@ -20,6 +20,7 @@ const schema = new Schema<IWatchlist>(
 
 schema.index({ userId: 1, contentId: 1 }, { unique: true });
 schema.index({ userId: 1, contentType: 1, addedOn: -1 });
+schema.index({ userId: 1, addedOn: -1 });
 
 const WatchlistModel = model<IWatchlist, Model<IWatchlist>>(
   "Watchlist",
