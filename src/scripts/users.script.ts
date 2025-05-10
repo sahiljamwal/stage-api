@@ -5,6 +5,7 @@ import UserModel from "../v1/schemas/users.schema";
 
 const usersData = [
   {
+    _id: new mongoose.Types.ObjectId("681ef3592194900a40fa0a06"),
     username: "john_doe",
     preferences: {
       favoriteGenres: [EGenre.ACTION, EGenre.SCIFI],
@@ -24,6 +25,7 @@ const usersData = [
     ],
   },
   {
+    _id: new mongoose.Types.ObjectId("681ef3592194900a40fa0a07"),
     username: "jane_smith",
     preferences: {
       favoriteGenres: [EGenre.DRAMA, EGenre.COMEDY],

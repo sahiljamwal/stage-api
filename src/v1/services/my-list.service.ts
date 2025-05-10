@@ -15,6 +15,7 @@ class MyListService {
 
   public add = async () => {
     try {
+      return;
     } catch (error) {
       return this._handleError(error as Error);
     }
@@ -22,6 +23,7 @@ class MyListService {
 
   public delete = async () => {
     try {
+      return;
     } catch (error) {
       return this._handleError(error as Error);
     }
@@ -29,6 +31,7 @@ class MyListService {
 
   public get = async () => {
     try {
+      return;
     } catch (error) {
       return this._handleError(error as Error);
     }

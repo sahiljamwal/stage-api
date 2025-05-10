@@ -7,3 +7,8 @@ export enum EGenre {
   ROMANCE = "Romance",
   SCIFI = "SciFi",
 }
+
+export enum EContentType {
+  MOVIE = "Movie",
+  TV_SHOW = "TV Show",
+}
